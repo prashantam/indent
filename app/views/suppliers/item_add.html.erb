@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @supplier.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @supplier.address %>
+</p>
+
+<p>
+  <b>Phone office:</b>
+  <%= @supplier.phone_office %>
+</p>
+
+<p>
+  <b>Mobile no:</b>
+  <%= @supplier.mobile_no %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @supplier.email %>
+</p>
+<p>
+  <h1>ITEMS SUPPLY</h1>
+</p>
+
+
+<%= form_for(@itemsupplier) do |f| %>
+ <%= f.hidden_field( :supplier_id, :value => @supplier.id )%> 
+<% @items.each do |item| %>
+<p>
+<% @alredyadditem = Stockist.find(:all,:conditions =>["item_id=? and supplier_id=?",item.id,@supplier.id]) %>
+  <% if @alredyadditem.blank?  %>
+ <%= check_box_tag 's_ids[]',item.id %> <%= item.itemname %>
+  <% else %>
+   <%= item.itemname %>
+  <% end %>
+  </p>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <% end %>
+
+<%= link_to 'Back', suppliers_path %>

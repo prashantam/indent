@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+  <th>Code</th><th>&nbsp;</th>
+  <th>Item name</th><th>&nbsp;</th>
+  <th>Manufacturer</th><th>&nbsp;</th>
+  <th>Unit</th><th>&nbsp;</th>
+  <th>Description</th><th>&nbsp;</th>
+  <th>Category</th><th>&nbsp;</th>
+</tr>
+
+<tr>
+  <td><%= @item.code %></td><td>&nbsp;</td>
+  <td><%= @item.itemname %></td><td>&nbsp;</td>
+  <td><%= @item.manufacturer %></td><td>&nbsp;</td>
+  <td><%= @item.unit %></td><td>&nbsp;</td>
+  <td><%= @item.description %></td><td>&nbsp;</td>
+   <% @cat=Category.find(@item.category_id) %>
+  <td><%= @cat.name %></td><td>&nbsp;</td>
+</tr>
+</table>
+<br><br>
+<h1>Suppliers List</h1>
+<%= form_for(@stockist) do |f| %>
+ <%= f.hidden_field( :item_id, :value => @item.id )%> 
+<% @suppliers.each do |s| %>
+<p>
+<% @alredyaddsuplier = Stockist.find(:all,:conditions =>["item_id=? and supplier_id=?",@item.id,s.id]) %>
+  <% if @alredyaddsuplier.blank?  %>
+ <%= check_box_tag 's_ids[]',s.id %> <%= s.name %>
+  <% else %>
+   <%= s.name %>
+  <% end %>
+  </p>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <% end %>
+<%= link_to 'Back', items_path %>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Indent</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "custom", :media => "screen" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="container">
+		<header>
+
+	<nav class="round">
+		<ul>
+			<li><%= link_to "Home",root_path %></li>
+	
+			<li><%= link_to "Items",root_path %></li>
+
+			<li><%= link_to "Categories", categories_path %></li>
+			
+			<li><%= link_to "Suppliers", suppliers_path %></li>
+			<li><%= link_to "Quotations", quotations_path %></li>
+		
+			</ul>
+		</nav>
+	</header>
+<section>
+<%= yield %>
+</section>
+<div class="container">
+</body>
+</html>

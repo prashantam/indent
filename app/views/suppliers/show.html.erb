@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @supplier.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @supplier.address %>
+</p>
+
+<p>
+  <b>Phone office:</b>
+  <%= @supplier.phone_office %>
+</p>
+
+<p>
+  <b>Mobile no:</b>
+  <%= @supplier.mobile_no %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @supplier.email %>
+</p>
+<p>
+  <h1>ITEMS SUPPLY</h1>
+</p>
+    <% if @current_items.blank? %>
+    <%= "No Items supplied by this supplier" %><br><br>
+      <% end %>
+
+      <% @current_items.each do |item| %>
+       <p>
+        <%= item.itemname %>
+      </p>
+      <% end %>
+
+<%= link_to 'Back', suppliers_path %>  |
+<%= link_to 'Edit', edit_supplier_path(@supplier) %>   | 
+<% if @items.blank? %>
+<b>No Item addted:<b><%= link_to 'Add items', new_supplier_stockist_path(@supplier) %>
+<% else %>
+<%= link_to 'Add more item', new_supplier_stockist_path(@supplier) %>
+<% end %> 

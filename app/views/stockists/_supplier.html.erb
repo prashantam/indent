@@ -1,0 +1,77 @@
+<script>
+function before_delete_message(f)
+{
+ 
+  	var chks = document.getElementsByName('delete_item_ids[]');
+    var hasChecked = false;
+  	for (var i = 0; i < chks.length; i++)
+    {
+      if (chks[i].checked)
+      {
+       hasChecked = true;
+       break;
+      }
+    }
+    if (hasChecked == false)
+    {
+    alert("Please select at least one.");
+    return false;
+    }
+    else
+       con = confirm("Are you really want to delete selected item ?")
+      if(con)
+     $('f').submit();
+     else
+       return false;
+}
+function before_add_items(f)
+{
+    var chks = document.getElementsByName('item_ids[]');
+    var hasChecked = false;
+    for (var i = 0; i < chks.length; i++)
+    {
+      if (chks[i].checked)
+      {
+       hasChecked = true;
+       break;
+      }
+    }
+    if (hasChecked == false)
+    {
+    alert("Please select at least one.");
+    return false;
+    }
+    else
+     $('f').submit();
+}
+</script>
+<h2><%= @supplier.name %></h2>
+<h3> Item Supply </h3>
+<% if @current_items.blank? %>
+  <%= "No Items supplied by this supplier" %>
+    <% else %>
+    <%= form_for :stockist,{:controller  => "stockist", :action => "destroy",:method =>:delete,:html=> {:onsubmit => 'return before_delete_message(this)'}} do  %>
+     <% @current_items.each do |item| %>
+     <%= check_box_tag 'delete_item_ids[]' ,item.id %><%= item.itemname %><br/>
+     <% end %>
+      <%= submit_tag("delete all") %>
+
+     <% end %>
+     <% end %>
+
+ 
+<h3> Other Items </h3>
+	<%= form_for([@supplier,@stockist],:html=> {:onsubmit => 'return before_add_items(this);'}) do |f| %>
+
+
+	<% @items.each do |item| %>
+	<% @alredy_add_item = Stockist.find(:all,:conditions =>["item_id=? and supplier_id=?",item.id,@supplier.id]) %>
+	  <% if @alredy_add_item.blank?  %>
+	<%= check_box_tag 'item_ids[]' ,item.id %><%= item.itemname %>
+	<% end %>
+	<br/>
+	<% end %>
+	<div class="actions">
+	    <%= f.submit %>
+	  </div>
+	<% end %>

@@ -1,0 +1,44 @@
+<h1>Listing suppliers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>&nbsp;</th>
+    <th>Address</th>
+    <th>&nbsp;</th>
+    <th>Phone(office)</th>
+    <th>&nbsp;</th>
+    <th>Mobile no</th>
+    <th>&nbsp;</th>
+    <th>Email</th>
+    <th>&nbsp;</th>
+    <th>Supply Items</th>
+    <th>&nbsp;</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @suppliers.each do |supplier| %>
+  <tr>
+    <td><%= supplier.name %></td><td>&nbsp;</td>
+    <td><%= supplier.address %></td><td>&nbsp;</td>
+    <td><%= supplier.phone_office %></td><td>&nbsp;</td>
+    <td><%= supplier.mobile_no %></td><td>&nbsp;</td>
+    <td><%= supplier.email %></td><td>&nbsp;</td>
+     <%  @item=Stockist.find_by_supplier_id(supplier.id) %>
+    <% if @item.nil? %>
+    <td><%= link_to 'add Items',new_supplier_stockist_path(supplier) %></td><td>&nbsp;</td>
+    <% else %>
+    <td><%= link_to 'Items',new_supplier_stockist_path(supplier) %></td><td>&nbsp;</td>
+    <% end %>
+    <td><%= link_to 'Details', supplier %></td>
+    <td><%= link_to 'Edit', edit_supplier_path(supplier) %></td>
+    <td><%= link_to 'Destroy', supplier, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Supplier', new_supplier_path %>

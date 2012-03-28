@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_id: 1
+  supplier_id: 1
+  rate: 1.5
+  date: 2012-03-13
+
+two:
+  item_id: 1
+  supplier_id: 1
+  rate: 1.5
+  date: 2012-03-13

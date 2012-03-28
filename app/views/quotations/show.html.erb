@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <% @qitem = Item.find(@quotation.item_id) %>
+  <%= @qitem.itemname %>
+</p>
+
+<p>
+  <b>Supplier:</b>
+  <% @qsup = Supplier.find(@quotation.supplier_id) %>
+  <%= @qsup.name %>
+</p>
+
+<p>
+  <b>Rate:</b>
+  <%= @quotation.rate %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @quotation.date %>
+</p>
+
+
+<%= link_to 'Edit', edit_quotation_path(@quotation) %> |
+<%= link_to 'Back', quotations_path %>

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+  <th>Code</th><th>&nbsp;</th>
+  <th>Item name</th><th>&nbsp;</th>
+  <th>Manufacturer</th><th>&nbsp;</th>
+  <th>Unit</th><th>&nbsp;</th>
+  <th>Description</th><th>&nbsp;</th>
+  <th>Category</th><th>&nbsp;</th>
+  <th>Quotations</th><th>&nbsp;</th>
+</tr>
+
+<tr>
+  <td><%= @item.code %></td><td>&nbsp;</td>
+  <td><%= @item.itemname %></td><td>&nbsp;</td>
+  <td><%= @item.manufacturer %></td><td>&nbsp;</td>
+  <td><%= @item.unit %></td><td>&nbsp;</td>
+  <td width ="25"><%= @item.description %></td><td>&nbsp;</td>
+   <% @cat=Category.find(@item.category_id) %>
+  <td><%= @cat.name %></td><td>&nbsp;</td>
+  <td align="center">------</td><td>&nbsp;</td>
+</tr>
+<tr>
+ <% if @suppliers.count < 1 %>
+  <th colspan="4">Not added any Suppliers</th><th><%= link_to 'add supplier',new_item_stockist_path(@item.id) %></th>
+  <% else %>
+  <th colspan="4">Suppliers List</th><th>&nbsp;</th>
+  <% end %>
+</tr>
+<% @suppliers.each do |supplier| %>
+<tr>
+  <th colspan="2">&nbsp;</th>
+  <td colspan="9"><%= supplier.name %></td>
+ <% @quotation = Quotation.find_by_supplier_id(supplier.id) %>
+ <td>&nbsp;</td><td>
+   <% if @quotation.blank? %>
+        No quotation &nbsp;</td><td>|&nbsp;<%= link_to 'Add Quotation', new_quotation_path %>
+   <% else %>
+        <%= @quotation.rate %>
+     <% end %>
+</td>
+</tr>
+<% end %>
+</table>
+<br><br>
+<%= link_to 'Back', items_path %>   |
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Add more suppliers',new_item_stockist_path(@item.id) %>

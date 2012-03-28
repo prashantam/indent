@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  code: MyString
+  itemname: MyString
+  manufacturer: MyString
+  unit: 1.5
+  description: MyString
+  category_id: 1
+
+two:
+  code: MyString
+  itemname: MyString
+  manufacturer: MyString
+  unit: 1.5
+  description: MyString
+  category_id: 1
